@@ -1,0 +1,73 @@
+Step-1: Install Homebrew on Mac command line using bash terminal
+
+  # brew web site
+  https://brew.sh
+
+  # copy & paste on terminal and enter to run. Please make sure any update on the site.
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.2h)
+
+Step-2: Install Nginx server on Mac command line
+
+  # verify nginx-full available. In september 2024, 1.27.0 version
+  brew info nginx-full        
+
+  # install nginx-full server version 1.27.0
+  brew install nginx-full --with-rtmp-module --with-debug
+
+  # export path nginx server by adding below on .bash_profile and make it available on default path
+  export NGINX_DIR=/usr/local/Cellar/nginx-full/1.27.0
+  source .bash_profile
+
+Step-3: Excute Nginx server on Mac command line
+
+  # to excute Nginx server with super user account
+  sudo nginx
+
+  # to verify Nginx running
+  ps ax | grep nginx
+
+  # once you edit nginx.conf, make sure it valid
+  sudo nginx -t
+
+  # then reload nginx server
+  sudo nginx -s reload
+
+Step-4: Download nginx.conf and copy to /usr/local/etc/nginx/
+  # nginx.conf is attached seperately, which can be download
+
+Step-5: Download index.htmp and copy to /usr/local/var/www/
+
+  # index.html is attached seperately, which can be download
+  # please edit your.local.ip.address like 192.168.1.99
+  # to see your local ip address on Mac command line
+  ifconfig
+
+Step-6: Create streaming video clip file folder
+
+  # live streaming video clip will dropped frames once you do live streaming on OBS
+  sudo mkdir -p /usr/local/var/www/stream/hls
+
+Step-7: Install OBS (Open Broadcast Studio)
+
+  # OBS site
+  https://obsproject.com/kb/mac-->installation
+
+  # In OBS studio add Source 
+  # Click + and select Video Capture Device(V4L2)
+
+  # In OBS studio set Controls / Settings
+  # Click Stream Settings
+  # Service: custom...
+  # Server: rtmp://your.local.ip.address:1935/live
+  # Stream Key: yourstreamingkey (example)
+
+  # In OBS studio set Controls / Clcik Start Streming
+  # Now OBS starts streaming by dropping frames on botoom panel
+
+Step-8: Browse index.html on your local machine or remote machine within same wifi
+
+  # Open any web browse enter local web site
+  http://your.local.ip.address
+
+Happy live streaming! 
+Thank you.
